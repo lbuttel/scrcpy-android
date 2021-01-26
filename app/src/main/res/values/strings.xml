@@ -11,6 +11,7 @@
     <string name="back_button">v</string>
 
     <string name="switch1">Nav Bar  (check this if target device does not have on-screen nav bar)</string>
+    <string name="orientationSwitch">Landscape (check this if target device is in landscape mode)</string>
 
 
     <string-array name="options_resolution_keys">
