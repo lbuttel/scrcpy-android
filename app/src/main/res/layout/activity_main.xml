@@ -20,74 +20,72 @@
             android:orientation="vertical">
 
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/label_server_ip"
-            android:textAppearance="@android:style/TextAppearance" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_server_ip"
+                android:textAppearance="@android:style/TextAppearance" />
 
-        <EditText
-            android:id="@+id/editText_server_host"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="none" />
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/label_video_resolution"
-            android:textAppearance="@android:style/TextAppearance" />
-
-        <Spinner
-            android:id="@+id/spinner_video_resolution"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/options_resolution_keys" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/label_video_bitrate"
-            android:textAppearance="@android:style/TextAppearance" />
-
-        <Spinner
-            android:id="@+id/spinner_video_bitrate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:entries="@array/options_bitrate_keys" />
+            <EditText
+                android:id="@+id/editText_server_host"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="none" />
 
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:text="@string/switch1"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/label_video_resolution"
+                android:textAppearance="@android:style/TextAppearance" />
 
-        <Switch
-            android:id="@+id/orientationSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:text="@string/orientationSwitch"/>
+            <Spinner
+                android:id="@+id/spinner_video_resolution"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/options_resolution_keys" />
 
-       <Button
-            android:id="@+id/button_start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="@string/action_start"
-            android:textSize="30sp" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/label_video_bitrate"
+                android:textAppearance="@android:style/TextAppearance" />
+
+            <Spinner
+                android:id="@+id/spinner_video_bitrate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:entries="@array/options_bitrate_keys" />
+
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/switch1"/>
+
+            <Switch
+                android:id="@+id/orientationSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/orientationSwitch"/>
+
+           <Button
+                android:id="@+id/button_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:text="@string/action_start"
+                android:textSize="30sp" />
+        </LinearLayout>
     </ScrollView>
 </LinearLayout>
 
