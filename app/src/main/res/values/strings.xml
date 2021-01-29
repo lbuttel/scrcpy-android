@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">scrcpy</string>
+    <string name="app_name">scrcpy-android</string>
 
     <string name="label_server_ip">Server IP</string>
 
