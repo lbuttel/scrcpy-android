@@ -18,12 +18,7 @@ import android.os.SystemClock;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
-import android.view.MotionEvent;
-import android.view.Surface;
-import android.view.SurfaceView;
-import android.view.View;
-import android.view.ViewConfiguration;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -160,6 +155,13 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         proximity = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         sensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
     }
 
     private void setSpinner(final int textArrayOptionResId, final int textViewResId, final String preferenceId) {

@@ -10,9 +10,11 @@
     <string name="home_button">o</string>
     <string name="back_button">v</string>
 
-    <string name="switch1">Nav Bar  (check this if target device does not have on-screen nav bar)</string>
+    <string name="navSwitch">Nav Bar  (check this if target device does not have on-screen nav bar)</string>
+    <string name="navSwitchCondensed">Nav Bar</string>
     <string name="orientationSwitch">Landscape (check this if target device is in landscape mode)</string>
-
+    <string name="orientationSwitchCondensed">Landscape</string>
+    <string name="customResOption">Add custom resolution</string>
 
     <string-array name="options_resolution_keys">
         <item>1920x1080</item>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navSwitchMenu"
+        android:title="@string/navSwitchCondensed"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/orientationSwitchMenu"
+        android:title="@string/orientationSwitchCondensed"
+        android:checkable="true"/>
+    <item
+        android:id="@+id/customResOption"
+        android:title="@string/customResOption"/>
+</menu>
