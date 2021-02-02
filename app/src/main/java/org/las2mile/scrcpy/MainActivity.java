@@ -64,6 +64,9 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
     private long timestamp = 0;
     private byte[] fileBase64;
 
+    private MenuItem menuItemNavBar;
+    private MenuItem menuItemLandscape;
+
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -123,21 +126,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
 
             this.context = this;
             final EditText editTextServerHost = (EditText) findViewById(R.id.editText_server_host);
-            final Switch aSwitch = findViewById(R.id.switch1);
             editTextServerHost.setText(context.getSharedPreferences(PREFERENCE_KEY, 0).getString("Server Address", ""));
-            aSwitch.setChecked(context.getSharedPreferences(PREFERENCE_KEY, 0).getBoolean("Nav Switch", false));
-            final Switch orientationSwitch = findViewById(R.id.orientationSwitch);
-            orientationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    landscape = isChecked;
-                    if (landscape) {
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                    } else {
-                        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    }
-                }
-            });
             setSpinner(R.array.options_resolution_keys, R.id.spinner_video_resolution, PREFERENCE_SPINNER_RESOLUTION);
             setSpinner(R.array.options_bitrate_keys, R.id.spinner_video_bitrate, PREFERENCE_SPINNER_BITRATE);
         } else {
@@ -161,7 +150,33 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+        menuItemNavBar = menu.findItem(R.id.navSwitchMenu);
+        nav = context.getSharedPreferences(PREFERENCE_KEY, 0).getBoolean("Nav Switch", false);
+        menuItemNavBar.setChecked(nav);
+        menuItemLandscape = menu.findItem(R.id.orientationSwitchMenu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navSwitchMenu :
+                nav = !item.isChecked();
+                item.setChecked(nav);
+                context.getSharedPreferences(PREFERENCE_KEY, 0).edit().putBoolean("Nav Switch", nav).apply();
+                return true;
+            case R.id.orientationSwitchMenu :
+                landscape = !item.isChecked();
+                item.setChecked(landscape);
+                if (landscape) {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                } else {
+                    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                }
+                return false;
+            default :
+                return true;
+        }
     }
 
     private void setSpinner(final int textArrayOptionResId, final int textViewResId, final String preferenceId) {
@@ -192,9 +207,6 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         context.getSharedPreferences(PREFERENCE_KEY, 0).edit().putString("Server Address", serverAdr).apply();
         final Spinner videoResolutionSpinner = (Spinner) findViewById(R.id.spinner_video_resolution);
         final Spinner videoBitrateSpinner = (Spinner) findViewById(R.id.spinner_video_bitrate);
-        final Switch aSwitch = findViewById(R.id.switch1);
-        nav = aSwitch.isChecked();
-        context.getSharedPreferences(PREFERENCE_KEY, 0).edit().putBoolean("Nav Switch", nav).apply();
         final String[] videoResolutions = getResources().getStringArray(R.array.options_resolution_values)[videoResolutionSpinner.getSelectedItemPosition()].split(",");
         screenHeight = Integer.parseInt(videoResolutions[0]);
         screenWidth = Integer.parseInt(videoResolutions[1]);

@@ -61,21 +61,6 @@
                 android:layout_marginTop="20dp"
                 android:entries="@array/options_bitrate_keys" />
 
-
-            <Switch
-                android:id="@+id/switch1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/navSwitch"/>
-
-            <Switch
-                android:id="@+id/orientationSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/orientationSwitch"/>
-
            <Button
                 android:id="@+id/button_start"
                 android:layout_width="wrap_content"
