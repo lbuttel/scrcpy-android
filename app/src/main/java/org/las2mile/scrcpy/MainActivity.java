@@ -20,12 +20,9 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -182,10 +179,6 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
     private void setSpinner(final int textArrayOptionResId, final int textViewResId, final String preferenceId) {
 
         final Spinner spinner = (Spinner) findViewById(textViewResId);
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, textArrayOptionResId, android.R.layout.simple_spinner_item);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(arrayAdapter);
-
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
