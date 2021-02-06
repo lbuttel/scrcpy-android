@@ -63,6 +63,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
 
     private MenuItem menuItemNavBar;
     private MenuItem menuItemLandscape;
+    private MenuItem menuItemResolution;
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -151,6 +152,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         nav = context.getSharedPreferences(PREFERENCE_KEY, 0).getBoolean("Nav Switch", false);
         menuItemNavBar.setChecked(nav);
         menuItemLandscape = menu.findItem(R.id.orientationSwitchMenu);
+        menuItemResolution = menu.findItem(R.id.customResOption);
         return true;
     }
 
@@ -170,6 +172,10 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                 } else {
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
                 }
+                return false;
+            case R.id.customResOption :
+                ResolutionFragment dialog = new ResolutionFragment();
+                dialog.show(getFragmentManager(), "Costum Resolution");
                 return false;
             default :
                 return true;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/fragment_resolution_et_x"
+        android:inputType="number"
+        android:ems="4"
+        android:id="@+id/fragment_resolution_et_y"
+        app:layout_constraintStart_toEndOf="@+id/fragment_resolution_tv_x"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/fragment_resolution_et_y"
+        android:inputType="number"
+        android:ems="4"
+        android:id="@+id/fragment_resolution_et_x"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_resolution_tv_x"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:text="x"
+        android:textAppearance="@android:style/TextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_resolution_tv_x"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_resolution_et_x" />
+</android.support.constraint.ConstraintLayout>
