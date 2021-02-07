@@ -125,8 +125,11 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
             this.context = this;
             final EditText editTextServerHost = (EditText) findViewById(R.id.editText_server_host);
             editTextServerHost.setText(context.getSharedPreferences(PREFERENCE_KEY, 0).getString("Server Address", ""));
-            setSpinner(R.array.options_resolution_keys, R.id.spinner_video_resolution, PREFERENCE_SPINNER_RESOLUTION);
-            setSpinner(R.array.options_bitrate_keys, R.id.spinner_video_bitrate, PREFERENCE_SPINNER_BITRATE);
+
+            Spinner spn_resolution = findViewById(R.id.spinner_video_resolution);
+            setSpinner(spn_resolution, PREFERENCE_SPINNER_RESOLUTION);
+            Spinner spn_bitrate = findViewById(R.id.spinner_video_bitrate);
+            setSpinner(spn_bitrate, PREFERENCE_SPINNER_BITRATE);
         } else {
             this.context = this;
             if (nav) {
@@ -182,9 +185,8 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         }
     }
 
-    private void setSpinner(final int textArrayOptionResId, final int textViewResId, final String preferenceId) {
+    private void setSpinner(Spinner spinner, final String preferenceId) {
 
-        final Spinner spinner = (Spinner) findViewById(textViewResId);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
