@@ -13,7 +13,9 @@
         android:ems="4"
         android:id="@+id/fragment_resolution_et_y"
         app:layout_constraintStart_toEndOf="@+id/fragment_resolution_tv_x"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -23,7 +25,9 @@
         android:ems="4"
         android:id="@+id/fragment_resolution_et_x"
         app:layout_constraintEnd_toStartOf="@+id/fragment_resolution_tv_x"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:text="x"
@@ -33,5 +37,6 @@
         android:id="@+id/fragment_resolution_tv_x"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_resolution_et_x" />
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_resolution_et_x"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>

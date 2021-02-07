@@ -3,4 +3,6 @@
     <string name="fragment_resolution_tv_title">Add custom resolution</string>
     <string name="fragment_resolution_btn_add">Save</string>
     <string name="fragment_resolution_btn_cancel">Cancel</string>
+    <string name="fragment_resolution_et_x">width</string>
+    <string name="fragment_resolution_et_y">height</string>
 </resources>
