@@ -177,7 +177,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
                 }
                 return false;
             case R.id.customResOption :
-                ResolutionFragment dialog = new ResolutionFragment();
+                ResolutionDialogFragment dialog = new ResolutionDialogFragment();
                 dialog.show(getFragmentManager(), "Costum Resolution");
                 return false;
             default :
