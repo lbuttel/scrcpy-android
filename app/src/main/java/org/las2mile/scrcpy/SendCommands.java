@@ -3,13 +3,12 @@ package org.las2mile.scrcpy;
 import android.content.Context;
 import android.util.Log;
 
-import org.las2mile.scrcpy.adblib.AdbBase64;
-import org.las2mile.scrcpy.adblib.AdbConnection;
-import org.las2mile.scrcpy.adblib.AdbCrypto;
-import org.las2mile.scrcpy.adblib.AdbStream;
+import com.tananaev.adblib.AdbBase64;
+import com.tananaev.adblib.AdbConnection;
+import com.tananaev.adblib.AdbCrypto;
+import com.tananaev.adblib.AdbStream;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.NoRouteToHostException;
@@ -48,8 +47,8 @@ public class SendCommands {
 
         AdbCrypto c = null;
         try {
-            FileInputStream privIn = context.openFileInput("priv.key");
-            FileInputStream pubIn = context.openFileInput("pub.key");
+            File privIn = context.getFileStreamPath("priv.key");
+            File pubIn = context.getFileStreamPath("pub.key");
             c = AdbCrypto.loadAdbKeyPair(getBase64Impl(), privIn, pubIn);
         } catch (IOException | InvalidKeySpecException | NoSuchAlgorithmException | NullPointerException e) {
             // Failed to read from file
@@ -62,8 +61,8 @@ public class SendCommands {
             c = AdbCrypto.generateAdbKeyPair(getBase64Impl());
 
             // Save it
-            FileOutputStream privOut = context.openFileOutput("priv.key", Context.MODE_PRIVATE);
-            FileOutputStream pubOut = context.openFileOutput("pub.key", Context.MODE_PRIVATE);
+            File privOut = context.getFileStreamPath("priv.key");
+            File pubOut = context.getFileStreamPath("pub.key");
 
             c.saveAdbKeyPair(privOut, pubOut);
             //Generated new keypair
