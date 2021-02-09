@@ -42,7 +42,7 @@ import java.util.Arrays;
 import java.util.Enumeration;
 
 
-public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, SensorEventListener {
+public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, SensorEventListener, ResolutionDialogFragment.ResolutionDialogListener {
 
     //    private static final String TAG = "MainActivity";
     private static final String PREFERENCE_KEY = "default";
@@ -187,6 +187,19 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
             return null;
         }
         return list;
+    }
+
+    public void onResolutionSaved(String resolution) {
+
+        ArrayList<String> customResolutionList = loadCustomResolutions();
+        if (customResolutionList != null) {
+            if (customResolutionList.get(customResolutionList.size() - 1).equals(resolution)) {
+                resolutionList.clear();
+                resolutionList.addAll(defaultResolutionList);
+                resolutionList.addAll(customResolutionList);
+                spnResolutionArrayAdapter.notifyDataSetChanged();
+            }
+        }
     }
 
     @Override

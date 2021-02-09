@@ -18,6 +18,12 @@ import java.io.OutputStreamWriter;
 
 public class ResolutionDialogFragment extends DialogFragment {
 
+	public interface ResolutionDialogListener {
+		public void onResolutionSaved (String resolution);
+	}
+
+	ResolutionDialogListener listener;
+
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
@@ -34,8 +40,7 @@ public class ResolutionDialogFragment extends DialogFragment {
 					public void onClick(DialogInterface dialog, int which) {
 						int width = Integer.parseInt(et_width.getText().toString());
 						int height = Integer.parseInt(et_height.getText().toString());
-						saveResolution(height, width);
-						((MainActivity)getActivity()).onResolutionSaved();
+						listener.onResolutionSaved(saveResolution(height, width));
 					}
 				})
 				.setNegativeButton(R.string.fragment_resolution_btn_cancel, new DialogInterface.OnClickListener() {
@@ -66,5 +71,16 @@ public class ResolutionDialogFragment extends DialogFragment {
 			return null;
 		}
 		return resolution;
+	}
+
+	@Override
+	public void onAttach(Context context) {
+
+		super.onAttach(context);
+		try {
+			listener = (ResolutionDialogListener) context;
+		} catch (ClassCastException e) {
+			throw new ClassCastException(getActivity().toString() + " must implement ResolutionDialogListener");
+		}
 	}
 }
