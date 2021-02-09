@@ -20,18 +20,25 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.*;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.Inet4Address;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 
 
@@ -64,6 +71,9 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
     private MenuItem menuItemNavBar;
     private MenuItem menuItemLandscape;
     private MenuItem menuItemResolution;
+    private ArrayList<String> resolutionList;
+    private ArrayList<String> defaultResolutionList;
+    private ArrayAdapter<String> spnResolutionArrayAdapter;
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -126,10 +136,20 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
             final EditText editTextServerHost = (EditText) findViewById(R.id.editText_server_host);
             editTextServerHost.setText(context.getSharedPreferences(PREFERENCE_KEY, 0).getString("Server Address", ""));
 
-            Spinner spn_resolution = findViewById(R.id.spinner_video_resolution);
-            setSpinner(spn_resolution, PREFERENCE_SPINNER_RESOLUTION);
-            Spinner spn_bitrate = findViewById(R.id.spinner_video_bitrate);
-            setSpinner(spn_bitrate, PREFERENCE_SPINNER_BITRATE);
+            Spinner spnResolution = findViewById(R.id.spinner_video_resolution);
+            defaultResolutionList = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.options_resolution_keys)));
+            ArrayList<String> customResolutionList = loadCustomResolutions();
+            resolutionList = new ArrayList<>(defaultResolutionList);
+            if (customResolutionList != null) {
+                resolutionList.addAll(customResolutionList);
+            }
+            spnResolutionArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, resolutionList);
+            spnResolution.setAdapter(spnResolutionArrayAdapter);
+
+            setSpinner(spnResolution, PREFERENCE_SPINNER_RESOLUTION);
+            Spinner spnBitrate = findViewById(R.id.spinner_video_bitrate);
+            setSpinner(spnBitrate, PREFERENCE_SPINNER_BITRATE);
+
         } else {
             this.context = this;
             if (nav) {
@@ -145,6 +165,28 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         proximity = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         sensorManager.registerListener(this, proximity, SensorManager.SENSOR_DELAY_NORMAL);
 
+    }
+
+    private ArrayList<String> loadCustomResolutions() {
+
+        ArrayList<String> list = new ArrayList<>();
+        try {
+            FileInputStream fileInputStream = openFileInput(getString(R.string.config_file_name));
+            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                list.add(line);
+            }
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return list;
     }
 
     @Override
@@ -208,7 +250,7 @@ public class MainActivity extends Activity implements Scrcpy.ServiceCallbacks, S
         context.getSharedPreferences(PREFERENCE_KEY, 0).edit().putString("Server Address", serverAdr).apply();
         final Spinner videoResolutionSpinner = (Spinner) findViewById(R.id.spinner_video_resolution);
         final Spinner videoBitrateSpinner = (Spinner) findViewById(R.id.spinner_video_bitrate);
-        final String[] videoResolutions = getResources().getStringArray(R.array.options_resolution_values)[videoResolutionSpinner.getSelectedItemPosition()].split(",");
+        final String[] videoResolutions = videoResolutionSpinner.getSelectedItem().toString().split("x");
         screenHeight = Integer.parseInt(videoResolutions[0]);
         screenWidth = Integer.parseInt(videoResolutions[1]);
         if (landscape) {
