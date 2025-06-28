@@ -104,7 +104,7 @@ public final class Device {
         this.rotationListener = rotationListener;
     }
 
-    public Point NewgetPhysicalPoint(Point point) {
+    public Point getPhysicalPoint(Point point) {
         @SuppressWarnings("checkstyle:HiddenField") // it hides the field on purpose, to read it with a lock
                 ScreenInfo screenInfo = getScreenInfo(); // read with synchronization
         Size videoSize = screenInfo.getVideoSize();

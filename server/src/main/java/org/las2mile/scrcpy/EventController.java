@@ -94,7 +94,7 @@ public class EventController {
                         int X = buffer[2];
                         int Y = buffer[3];
                         Point point = new Point(X, Y);
-                        Point newpoint = device.NewgetPhysicalPoint(point);
+                        Point newpoint = device.getPhysicalPoint(point);
                         setPointerCoords(newpoint);
                         MotionEvent event = MotionEvent.obtain(lastMouseDown, now, action, 1, pointerProperties, pointerCoords, 0, button, 1f, 1f, 0, 0, InputDevice.SOURCE_TOUCHSCREEN, 0);
                         injectEvent(event);
